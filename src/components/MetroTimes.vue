@@ -10,7 +10,7 @@ export default {
     getMetroTimes(stationCode = 'F04') {
       fetch(`https://api.wmata.com/StationPrediction.svc/json/GetPrediction/${stationCode}`, {
         headers: {
-          api_key: process.env.API_KEY
+          api_key: '5ea601e3fd044a21969e5c5ef3375c3c'
         }
       })
         .then((res) => {
