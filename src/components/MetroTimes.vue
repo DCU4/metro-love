@@ -8,7 +8,11 @@ export default {
   },
   methods: {
     getMetroTimes(stationCode = 'F04') {
-      fetch('http://localhost:8081/metro-times', {
+      let url = 'https://metro-love.vercel.app/metro-times'
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        url = 'http://localhost:8081/metro-times'
+      }
+      fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
