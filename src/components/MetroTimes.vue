@@ -9,7 +9,7 @@ export default {
   methods: {
     getMetroTimes(stationCode = 'F04') {
       let url = 'https://metro-love.vercel.app/metro-times'
-      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+      if (location.hostname === 'localhost') {
         url = 'http://localhost:8081/metro-times'
       }
       fetch(url, {
