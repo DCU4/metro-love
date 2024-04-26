@@ -8,23 +8,24 @@ export default {
   },
   methods: {
     getMetroTimes(stationCode = 'F04') {
-      fetch(`https://api.wmata.com/StationPrediction.svc/json/GetPrediction/${stationCode}`, {
+      fetch('http://localhost:8081/metro-times', {
+        method: 'POST',
         headers: {
-          api_key: '5ea601e3fd044a21969e5c5ef3375c3c'
-        }
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ stationCode: stationCode })
       })
         .then((res) => {
           return res.json()
         })
         .then((data) => {
-          if (stationCode == 'F04') {
-            const trains = data.Trains.filter((x) => x.DestinationName == 'Greenbelt')
-            this.waterfrontData = trains
+          if (data) {
+            if (stationCode == 'F04') {
+              this.waterfrontData = data
+            } else {
+              this.columbiaHeightsData = data
+            }
           } else {
-            const trains = data.Trains.filter(
-              (x) => x.DestinationName == 'Branch Ave' || x.DestinationName == 'Navy Yard-Ballpark'
-            )
-            this.columbiaHeightsData = trains
           }
         })
         .catch((err) => console.log(err))
@@ -39,7 +40,9 @@ export default {
 
 <template>
   <div id="metro-times">
-    <div v-if="data === null" class="spinner">Loading Data...<span></span></div>
+    <div v-if="this.columbiaHeightsData === null || this.waterfrontData === null" class="spinner">
+      Loading Data...<span></span>
+    </div>
     <div v-else>
       <h1>Metro Love <3</h1>
 
