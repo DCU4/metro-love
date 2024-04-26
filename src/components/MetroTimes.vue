@@ -3,7 +3,9 @@ export default {
   data() {
     return {
       waterfrontData: null,
-      columbiaHeightsData: null
+      columbiaHeightsData: null,
+      title: 'Metro Love <3',
+      noMoreTrains: false
     }
   },
   methods: {
@@ -30,6 +32,7 @@ export default {
               this.columbiaHeightsData = data
             }
           } else {
+            this.noMoreTrains = true
           }
         })
         .catch((err) => console.log(err))
@@ -44,12 +47,19 @@ export default {
 
 <template>
   <div id="metro-times">
-    <div v-if="this.columbiaHeightsData === null || this.waterfrontData === null" class="spinner">
-      Loading Data...<span></span>
+    <h1>{{ this.title }}</h1>
+    <div
+      v-if="
+        (this.columbiaHeightsData === null || this.waterfrontData === null) &&
+        this.noMoreTrains === false
+      "
+      class="spinner"
+    >
+      <h2>Loading Data...</h2>
+      <span></span>
     </div>
+    <div v-else-if="this.noMoreTrains === true"><h2>No More Trains</h2></div>
     <div v-else>
-      <h1>Metro Love <3</h1>
-
       <div id="COHI" class="wrapper">
         <h2>Columbia Heights</h2>
         <header class="grid-item">
