@@ -16,7 +16,7 @@ if (fs.existsSync('./credentials.json')) {
   credentials = JSON.parse(fs.readFileSync('./credentials.json'));
 }
 
-const api_key = process.env.api_key ? process.env.api_key : credentials.primary_key
+const API_KEY = process.env.API_KEY != null ? process.env.API_KEY : credentials.primary_key
 
 app.use(express.static(`${__dirname}/views`)); // html
 app.use(express.static(`${__dirname}/public`)); // js, css, images
@@ -29,7 +29,7 @@ app.set('view engine', 'ejs');
 async function getMetroTimes(stationCode = 'F04') {
   const response = await fetch(`https://api.wmata.com/StationPrediction.svc/json/GetPrediction/${stationCode}`, {
     headers: {
-      api_key: api_key
+      api_key: API_KEY
     }
   })
 
