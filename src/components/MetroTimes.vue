@@ -38,7 +38,7 @@ export default {
         .catch((err) => console.log(err))
     }
   },
-  mounted() {
+  created() {
     this.getMetroTimes()
     this.getMetroTimes('E04')
   }
