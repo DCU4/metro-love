@@ -43,7 +43,7 @@ async function getMetroTimes(stationCode = 'F04') {
     }
   } else {
     const trains = data.Trains.filter(
-      (x) => x.DestinationName == 'Branch Ave' || x.DestinationName == 'Navy Yard-Ballpark'
+      (x) => x.DestinationName.includes('Branch') || x.DestinationName == 'Navy Yard-Ballpark'
     )
     if (trains.length > 0) {
       return trains;
