@@ -55,24 +55,16 @@ async function getMetroTimes(stationCode = 'F04') {
 
 
 app.get('/', async (req, res) => {
-  if (res.statusCode === 200) {
-    res.json('metro love ok')
-  } else {
-    res.sendStatus(404);
-  }
+  res.json('metro love ok');
 });
 
 app.post('/metro-times', async (req, res) => {
   const { stationCode } = req.body;
-  if (res.statusCode === 200) {
-    const response = await getMetroTimes(stationCode);
-    if (response) {
-      res.json(response)
-    } else {
-      res.json(null)
-    }
+  const response = await getMetroTimes(stationCode);
+  if (response) {
+    res.json(response)
   } else {
-    res.sendStatus(404);
+    res.json(null)
   }
 });
 
