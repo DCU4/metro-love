@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     getMetroTimes(stationCode = 'F04') {
-      let url = 'https://metro-love.onrender.com/'
+      let url = 'https://metro-love.onrender.com/metro-timesmetro-times'
       if (location.hostname === 'localhost') {
         url = 'http://localhost:8081/metro-times'
       }
