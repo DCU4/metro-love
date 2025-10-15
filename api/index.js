@@ -64,15 +64,11 @@ app.get('/', async (req, res) => {
 
 app.post('/metro-times', async (req, res) => {
   const { stationCode } = req.body;
-  if (res.statusCode === 200) {
-    const response = await getMetroTimes(stationCode);
-    if (response) {
-      res.json(response)
-    } else {
-      res.json(null)
-    }
+  const response = await getMetroTimes(stationCode);
+  if (response) {
+    res.json(response);
   } else {
-    res.sendStatus(404);
+    res.json(null);
   }
 });
 
