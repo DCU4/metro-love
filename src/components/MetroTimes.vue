@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     getMetroTimes(stationCode = 'F04') {
-      let url = 'https://metro-love.vercel.app/metro-times'
+      let url = 'https://metro-love.onrender.com/metro-timesmetro-times'
       if (location.hostname === 'localhost') {
         url = 'http://localhost:8081/metro-times'
       }
@@ -48,17 +48,16 @@ export default {
 <template>
   <div id="metro-times">
     <h1>{{ this.title }}</h1>
-    <div
-      v-if="
-        (this.columbiaHeightsData === null || this.waterfrontData === null) &&
-        this.noMoreTrains === false
-      "
-      class="spinner"
-    >
+    <div v-if="
+      (this.columbiaHeightsData === null || this.waterfrontData === null) &&
+      this.noMoreTrains === false
+    " class="spinner">
       <h2>Loading Data...</h2>
       <span></span>
     </div>
-    <div v-else-if="this.noMoreTrains === true"><h2>No More Trains</h2></div>
+    <div v-else-if="this.noMoreTrains === true">
+      <h2>No More Trains</h2>
+    </div>
     <div v-else>
       <div id="COHI" class="wrapper">
         <h2>Columbia Heights</h2>
@@ -67,11 +66,7 @@ export default {
           <p>Desination</p>
           <p>Min</p>
         </header>
-        <div
-          v-for="(item, index) in this.columbiaHeightsData"
-          :key="index"
-          class="grid-item single-time"
-        >
+        <div v-for="(item, index) in this.columbiaHeightsData" :key="index" class="grid-item single-time">
           <p id="green">G</p>
           <p>{{ item.DestinationName }}</p>
           <p>{{ item.Min }}</p>
@@ -85,11 +80,7 @@ export default {
           <p>Desination</p>
           <p>Min</p>
         </header>
-        <div
-          v-for="(item, index) in this.waterfrontData"
-          :key="index"
-          class="grid-item single-time"
-        >
+        <div v-for="(item, index) in this.waterfrontData" :key="index" class="grid-item single-time">
           <p id="green">G</p>
           <p>{{ item.DestinationName }}</p>
           <p>{{ item.Min }}</p>
